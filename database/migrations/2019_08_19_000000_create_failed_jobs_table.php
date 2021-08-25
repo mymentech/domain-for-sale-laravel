@@ -13,6 +13,8 @@ class CreateFailedJobsTable extends Migration
      */
     public function up()
     {
+        //Stopping Mysql Primary Key Related Error Error
+        if(config('database.default') === 'mysql') \Illuminate\Support\Facades\DB::statement('SET SESSION sql_require_primary_key=0');
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
