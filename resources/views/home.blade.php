@@ -55,9 +55,21 @@
                         <div class="container">
                             <div class="row height-100">
                                 <div class="col-sm-10 offset-sm-1 mt-2">
-                                    <form id="main-offer-form" action="contact.php" method="post">
+                                    <form id="main-offer-form" action="{{route('submitOffer')}}" method="post">
                                         @csrf
                                         <h2 class="text-primary">Interested in this domain?</h2>
+                                        <hr />
+                                        <div class="form-group">
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                        </div>
                                         <hr />
                                         <div class="form-group">
                                             <input type="text" name="name" id="name" class="form-control"
@@ -82,14 +94,18 @@
                                                 min="0" placeholder="Offer price in USD? (Required)">
                                         </div>
                                         <div class="form-group">
-                                            <textarea name="comments" class="form-control"
+                                            <textarea name="message" class="form-control"
                                                 placeholder="Message (optional)"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <div id="recaptcha" class="g-recaptcha"
-                                                data-sitekey="6Lc_sf8aAAAAAFk3KIcYvqcIoo1HeCOZu4faK3DA"
-                                                data-callback="onSubmit" data-size="invisible"></div>
+                                            @if ($errors->has('g-recaptcha-response'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                </span>
+                                            @endif
+                                            {!! NoCaptcha::display() !!}
                                         </div>
+                                        
 
                                         <button type="submit" class="btn text-white btn-lg bg-primary btn-block">Make an
                                             offer</button>
@@ -103,6 +119,8 @@
         </div>
     </section>
     <script src="{{asset('js/home.js')}}"></script>
+    {!! NoCaptcha::renderJs() !!}
+
 
 </body>
 

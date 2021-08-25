@@ -159,6 +159,8 @@
     </section>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/home.js') }}"></script>
+    {!! NoCaptcha::renderJs() !!}
+
 
 </body>
 

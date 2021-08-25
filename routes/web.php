@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OffersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-})->name('home');;
+})->name('home');
 
 Route::get('/faq', function () {
     return view('faq');
-})->name('faq');;
+})->name('faq');
+
+Route::get('/thank-you', function () {
+    return view('thankyou');
+})->name('thankyou');
+
+Route::post('/submit-offer', [OffersController::class, 'submit'])->name('submitOffer');;
