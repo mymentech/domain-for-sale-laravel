@@ -363,3 +363,16 @@ html {
     margin-top: 10px;
   }
 }
+
+
+@media (max-width: 640px) {
+    .action-icons {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        position: inherit !important;
+    }
+
+    section.bg-alt .row.height-100{
+        height: unset;
+    }
+}
